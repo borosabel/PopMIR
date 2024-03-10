@@ -1,0 +1,80 @@
+{
+    "westside connection": {
+        "azprofile": "https://www.azlyrics.com/w/westsideconnection.html",
+        "done": true
+    },
+    "nwa": {
+        "azprofile": "https://www.azlyrics.com/n/nwa.html",
+        "done": false
+    },
+    "the pharcyde": {
+        "azprofile": "https://www.azlyrics.com/p/pharcyde.html",
+        "done": true
+    },
+    "snoop doggy dogg": {
+        "azprofile": "https://www.azlyrics.com/s/snoopdogg.html",
+        "done": true
+    },
+    "souls of mischief": {
+        "azprofile": "https://www.azlyrics.com/s/soulsofmischief.html",
+        "done": true
+    },
+    "dj quik": {
+        "azprofile": "https://www.azlyrics.com/d/djquik.html",
+        "done": true
+    },
+    "Dr.Dre": {
+        "azprofile": "https://www.azlyrics.com/d/drdre.html",
+        "done": true
+    },
+    "coolio": {
+        "azprofile": "https://www.azlyrics.com/c/coolio.html",
+        "done": true
+    },
+    "cypress hill": {
+        "azprofile": "https://www.azlyrics.com/c/cypress.html",
+        "done": true
+    },
+    "2pac": {
+        "azprofile": "https://www.azlyrics.com/19/2pac.html",
+        "done": true
+    },
+    "eazy e": {
+        "azprofile": "https://www.azlyrics.com/e/eazye.html",
+        "done": true
+    },
+    "ice cube": {
+        "azprofile": "https://www.azlyrics.com/i/icecube.html",
+        "done": true
+    },
+    "saafir": {
+        "azprofile": "https://www.azlyrics.com/s/saafir.html",
+        "done": false
+    },
+    "dj shadow": {},
+    "luniz": {
+        "azprofile": "https://www.azlyrics.com/l/luniz.html",
+        "done": false
+    },
+    "warren g ": {
+        "azprofile": "https://www.azlyrics.com/w/warreng.html",
+        "done": false
+    },
+    "ice-t": {
+        "azprofile": "https://www.azlyrics.com/i/icet.html",
+        "done": false
+    },
+    "digital underground": {
+        "azprofile": "https://www.azlyrics.com/d/digitalunderground.html",
+        "done": false
+    },
+    "too short": {
+        "azprofile": "https://www.azlyrics.com/t/toohort.html",
+        "done": false
+    },
+    "the alkaholiks": {},
+    "mack 10": {
+        "azprofile": "https://www.azlyrics.com/m/mack10.html",
+        "done": false
+    }
+}
