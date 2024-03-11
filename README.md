@@ -1,6 +1,9 @@
 # PopMIR
 
-Learn more about the project [here.](https://www.jku.at/en/institute-of-computational-perception/research/projects/popmir/) 
+![img_1.png](img_1.png)
+
+### **Disclaimer**: This is a Master thesis project in progress at the Johannes Kepler University in Linz.
+### This Master thesis is part of a bigger research project, you can learn more about it [here.](https://www.jku.at/en/institute-of-computational-perception/research/projects/popmir/)
 
 ### Initial Data Buildup & Lyrics Scraping
 
