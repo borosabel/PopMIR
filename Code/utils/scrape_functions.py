@@ -61,12 +61,12 @@ def get_lyrics(
 
     year_passed_1999 = False
     try:
-        if 1986 < year <= 1999:
+        if 1986 <= year <= 1996:
             os.makedirs(album_path, exist_ok=True)  # Ensure album directory exists
             file_path = os.path.join(album_path, file_title)
-            print(file_path)
+            print("File path:", file_path+'.txt')
             # Check if the file exists and replace is False
-            if not os.path.exists(file_path) or replace:
+            if not os.path.exists(file_path + '.txt') or replace:
                 save_file(path=file_path, text=lyrics, replace=replace)
                 year_passed_1999 = False
                 return year_passed_1999

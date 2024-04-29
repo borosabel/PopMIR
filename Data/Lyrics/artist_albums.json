@@ -1,0 +1,700 @@
+{
+    "big l": [
+        {
+            "album_name": "Lifestylez Ov Da Poor and Dangerous",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/big_l/Lifestylez Ov Da Poor and Dangerous (1995)",
+            "region": "east_coast"
+        }
+    ],
+    "beastie boys": [
+        {
+            "album_name": "Check Your Head",
+            "release_date": "1992",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/beastie_boys/Check Your Head (1992)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Hello Nasty",
+            "release_date": "1998",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/beastie_boys/Hello Nasty (1998)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Ill Communication",
+            "release_date": "1994",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/beastie_boys/Ill Communication (1994)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Paul's Boutique",
+            "release_date": "1989",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/beastie_boys/Paul's Boutique (1989)",
+            "region": "east_coast"
+        }
+    ],
+    "a tribe called quest": [
+        {
+            "album_name": "Beats Rhymes and Life",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/a_tribe_called_quest/Beats Rhymes and Life (1996)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "The Low End Theory",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/a_tribe_called_quest/The Low End Theory (1991)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "People's Instinctive Travels and the Paths of Rhythm",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/a_tribe_called_quest/People's Instinctive Travels and the Paths of Rhythm (1990)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Midnight Marauders",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/a_tribe_called_quest/Midnight Marauders (1993)",
+            "region": "east_coast"
+        }
+    ],
+    "run dmc": [
+        {
+            "album_name": "Down With The King",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/run-dmc/Down With The King (1993)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Tougher Than Leather",
+            "release_date": "1988",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/run-dmc/Tougher Than Leather (1988)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Back From Hell",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/run-dmc/Back From Hell (1990)",
+            "region": "east_coast"
+        }
+    ],
+    "the notorious big": [
+        {
+            "album_name": "Ready To Die",
+            "release_date": "1994",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/the_notorious_big/Ready To Die (1994)",
+            "region": "east_coast"
+        }
+    ],
+    "jay z": [
+        {
+            "album_name": "In My Lifetime Vol. 1",
+            "release_date": "1997",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/jay-z/In My Lifetime Vol. 1 (1997)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Vol. 2...  Hard Knock Life",
+            "release_date": "1998",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/jay-z/Vol. 2...  Hard Knock Life (1998)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Reasonable Doubt",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/jay-z/Reasonable Doubt (1996)",
+            "region": "east_coast"
+        }
+    ],
+    "nas": [
+        {
+            "album_name": "It Was Written",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/nas/It Was Written (1996)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Illmatic",
+            "release_date": "1994",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/nas/Illmatic (1994)",
+            "region": "east_coast"
+        }
+    ],
+    "dmx": [
+        {
+            "album_name": "It's Dark And Hell Is Hot",
+            "release_date": "1998",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/dmx/It's Dark And Hell Is Hot (1998)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Flesh Of My Flesh, Blood Of My Blood",
+            "release_date": "1998",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/dmx/Flesh Of My Flesh, Blood Of My Blood (1998)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "...And Then There Was X",
+            "release_date": "1999",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/dmx/...And Then There Was X (1999)",
+            "region": "east_coast"
+        }
+    ],
+    "ll cool j": [
+        {
+            "album_name": "Bigger & Deffer",
+            "release_date": "1987",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/ll_cool_j/Bigger & Deffer (1987)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "14 Shots To The Dome",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/ll_cool_j/14 Shots To The Dome (1993)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Mr Smith",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/ll_cool_j/Mr Smith (1995)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Walking With The Panther",
+            "release_date": "1989",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/ll_cool_j/Walking With The Panther (1989)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Mama Said Knock You Out",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/ll_cool_j/Mama Said Knock You Out (1990)",
+            "region": "east_coast"
+        }
+    ],
+    "mobb deep": [
+        {
+            "album_name": "Hell On Earth",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/mobb_deep/Hell On Earth (1996)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "The Infamous",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/mobb_deep/The Infamous (1995)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Juvenile Hell",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/mobb_deep/Juvenile Hell (1993)",
+            "region": "east_coast"
+        }
+    ],
+    "erik b and rakim": [
+        {
+            "album_name": "Paid In Full",
+            "release_date": "1987",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/erikb_&_rakim/Paid In Full (1987)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Let The Rhythm Hit 'Em",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/erikb_&_rakim/Let The Rhythm Hit 'Em (1990)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Don't Sweat The Technique",
+            "release_date": "1992",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/erikb_&_rakim/Don't Sweat The Technique (1992)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Follow The Leader",
+            "release_date": "1988",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/erikb_&_rakim/Follow The Leader (1988)",
+            "region": "east_coast"
+        }
+    ],
+    "public enemy": [
+        {
+            "album_name": "It Takes A Nation Of Millions To Hold Us Back",
+            "release_date": "1988",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/public_enemy/It Takes A Nation Of Millions To Hold Us Back (1988)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Fear Of A Black Planet",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/public_enemy/Fear Of A Black Planet (1990)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Yo! Bum Rush The Show",
+            "release_date": "1987",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/public_enemy/Yo! Bum Rush The Show (1987)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Muse Sick-N-Hour Mess Age",
+            "release_date": "1994",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/public_enemy/Muse Sick-N-Hour Mess Age (1994)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Apocalypse 91... The Enemy Strikes Black",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/public_enemy/Apocalypse 91... The Enemy Strikes Black (1991)",
+            "region": "east_coast"
+        }
+    ],
+    "wu tang clan": [
+        {
+            "album_name": "Enter The Wu-Tang (36 Chambers)",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/wu_tang_clan/Enter The Wu-Tang (36 Chambers) (1993)",
+            "region": "east_coast"
+        }
+    ],
+    "busta rhymes": [
+        {
+            "album_name": "When Disaster Strikes",
+            "release_date": "1997",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/busta_rhymes/When Disaster Strikes (1997)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Extinction Level Event",
+            "release_date": "1998",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/busta_rhymes/Extinction Level Event (1998)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "The Coming",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/busta_rhymes/The Coming (1996)",
+            "region": "east_coast"
+        }
+    ],
+    "de la soul": [
+        {
+            "album_name": "Buhloone Mind State",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/de_la_soul/Buhloone Mind State (1993)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "3 Feet High And Rising",
+            "release_date": "1989",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/de_la_soul/3 Feet High And Rising (1989)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Stakes Is High",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/de_la_soul/Stakes Is High (1996)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "De La Soul Is Dead",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/de_la_soul/De La Soul Is Dead (1991)",
+            "region": "east_coast"
+        }
+    ],
+    "puff daddy": [
+        {
+            "album_name": "Forever",
+            "release_date": "1999",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/puff_daddy/Forever (1999)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "No Way Out",
+            "release_date": "1997",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/puff_daddy/No Way Out (1997)",
+            "region": "east_coast"
+        }
+    ],
+    "gang starr": [
+        {
+            "album_name": "No More Mr. Nice Guy",
+            "release_date": "1989",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/gang_starr/No More Mr. Nice Guy (1989)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Hard To Earn",
+            "release_date": "1994",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/gang_starr/Hard To Earn (1994)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Step In The Arena",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/gang_starr/Step In The Arena (1990)",
+            "region": "east_coast"
+        },
+        {
+            "album_name": "Daily Operation",
+            "release_date": "1992",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/east_coast/gang_starr/Daily Operation (1992)",
+            "region": "east_coast"
+        }
+    ],
+    "souls of mischief": [
+        {
+            "album_name": "93 'Til Infinity",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/soulsofmischief/93 'Til Infinity (1993)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "No Man's Land",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/soulsofmischief/No Man's Land (1990)",
+            "region": "west_coast"
+        }
+    ],
+    "nwa": [
+        {
+            "album_name": "EP: 100 Miles And Runnin'",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/nwa/EP: 100 Miles And Runnin' (1990)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "N.W.A. And The Posse",
+            "release_date": "1987",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/nwa/N.W.A. And The Posse (1987)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Straight Outta Compton",
+            "release_date": "1988",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/nwa/Straight Outta Compton (1988)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Efil4zaggin",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/nwa/Efil4zaggin (1991)",
+            "region": "west_coast"
+        }
+    ],
+    "coolio": [
+        {
+            "album_name": "Gangsta's Paradise",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/coolio/Gangsta's Paradise (1995)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "It Takes A Thief",
+            "release_date": "1994",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/coolio/It Takes A Thief (1994)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "My Soul",
+            "release_date": "1997",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/coolio/My Soul (1997)",
+            "region": "west_coast"
+        }
+    ],
+    "ice cube": [
+        {
+            "album_name": "Death Certificate",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice_cube/Death Certificate (1991)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "The Predator",
+            "release_date": "1992",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice_cube/The Predator (1992)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "EP: Kill At Will",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice_cube/EP: Kill At Will (1991)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "AmeriKKKa's Most Wanted",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice_cube/AmeriKKKa's Most Wanted (1990)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Lethal Injection",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice_cube/Lethal Injection (1993)",
+            "region": "west_coast"
+        }
+    ],
+    "too short": [
+        {
+            "album_name": "Cocktails",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/too_short/Cocktails (1995)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Gettin' It (Album Number Ten)",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/too_short/Gettin' It (Album Number Ten) (1996)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Life Is... Too Short",
+            "release_date": "1988",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/too_short/Life Is... Too Short (1988)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Get In Where You Fit In",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/too_short/Get In Where You Fit In (1993)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Born To Mack",
+            "release_date": "1987",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/too_short/Born To Mack (1987)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Short Dog's In The House",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/too_short/Short Dog's In The House (1990)",
+            "region": "west_coast"
+        }
+    ],
+    "snoop dogg": [
+        {
+            "album_name": "Doggystyle",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/snoop_dogg/Doggystyle (1993)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Tha Doggfather",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/snoop_dogg/Tha Doggfather (1996)",
+            "region": "west_coast"
+        }
+    ],
+    "luniz": [
+        {
+            "album_name": "Operation Stackola",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/luniz/Operation Stackola (1995)",
+            "region": "west_coast"
+        }
+    ],
+    "pac": [
+        {
+            "album_name": "Me Against The World",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/pac/Me Against The World (1995)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "All Eyez On Me",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/pac/All Eyez On Me (1996)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Strictly 4 My N.I.G.G.A.Z.",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/pac/Strictly 4 My N.I.G.G.A.Z. (1993)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Makaveli - The Don Killuminati: The 7 Day Theory",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/pac/Makaveli - The Don Killuminati: The 7 Day Theory (1996)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "2Pacalypse Now",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/pac/2Pacalypse Now (1991)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Still I Rise",
+            "release_date": "1999",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/pac/Still I Rise (1999)",
+            "region": "west_coast"
+        }
+    ],
+    "cypress hill": [
+        {
+            "album_name": "Cypress Hill III: Temples Of Boom",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/cypress_hill/Cypress Hill III: Temples Of Boom (1995)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Black Sunday",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/cypress_hill/Black Sunday (1993)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Cypress Hill",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/cypress_hill/Cypress Hill (1991)",
+            "region": "west_coast"
+        }
+    ],
+    "eazy e": [
+        {
+            "album_name": "Eternal E",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/eazy_e/Eternal E (1995)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Eazy-Duz-It",
+            "release_date": "1988",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/eazy_e/Eazy-Duz-It (1988)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "EP: It's On (Dr. Dre) 187um Killa",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/eazy_e/EP: It's On (Dr. Dre) 187um Killa (1993)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Str8 Off Tha Streetz Of Muthaphukkin' Compton",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/eazy_e/Str8 Off Tha Streetz Of Muthaphukkin' Compton (1995)",
+            "region": "west_coast"
+        }
+    ],
+    "digital underground": [
+        {
+            "album_name": "Sex Packets",
+            "release_date": "1990",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/digital_underground/Sex Packets (1990)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Sons Of The P",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/digital_underground/Sons Of The P (1991)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "The Body-Hat Syndrome",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/digital_underground/The Body-Hat Syndrome (1993)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Future Rhythm",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/digital_underground/Future Rhythm (1996)",
+            "region": "west_coast"
+        }
+    ],
+    "warren g": [
+        {
+            "album_name": "Regulate...G Funk Era",
+            "release_date": "1994",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/warren_g_/Regulate...G Funk Era (1994)",
+            "region": "west_coast"
+        }
+    ],
+    "ice t": [
+        {
+            "album_name": "Power",
+            "release_date": "1988",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice-t/Power (1988)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "VI - Return Of The Real",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice-t/VI - Return Of The Real (1996)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Rhyme Pays",
+            "release_date": "1987",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice-t/Rhyme Pays (1987)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "O.G. Original Gangster",
+            "release_date": "1991",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice-t/O.G. Original Gangster (1991)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "The Iceberg",
+            "release_date": "Unknown",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice-t/The Iceberg",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Home Invasion",
+            "release_date": "1993",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/ice-t/Home Invasion (1993)",
+            "region": "west_coast"
+        }
+    ],
+    "westside connection": [
+        {
+            "album_name": "Bow Down",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/westside_connection/Bow Down (1996)",
+            "region": "west_coast"
+        }
+    ],
+    "the pharcyde": [
+        {
+            "album_name": "Labcabincalifornia",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/the_pharcyde/Labcabincalifornia (1995)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "Bizarre Ride II The Pharcyde",
+            "release_date": "1992",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/the_pharcyde/Bizarre Ride II The Pharcyde (1992)",
+            "region": "west_coast"
+        }
+    ],
+    "drdre": [
+        {
+            "album_name": "The Aftermath",
+            "release_date": "1996",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/Dr.Dre/The Aftermath (1996)",
+            "region": "west_coast"
+        },
+        {
+            "album_name": "The Chronic",
+            "release_date": "1992",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/Dr.Dre/The Chronic (1992)",
+            "region": "west_coast"
+        }
+    ],
+    "mack 10": [
+        {
+            "album_name": "Mack 10",
+            "release_date": "1995",
+            "path": "/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Lyrics/west_coast/mack_10/Mack 10 (1995)",
+            "region": "west_coast"
+        }
+    ]
+}

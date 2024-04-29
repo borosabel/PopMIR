@@ -4,6 +4,7 @@ import configparser
 import re
 import pandas as pd
 import os
+import librosa
 
 
 def get_set_of_artists(data):
@@ -29,11 +30,11 @@ def load_east_west_json():
 
 
 def load_west_coast_json():
-    return load_json('../../Data/west_coast.json')
+    return load_json('../../Data/rolling_stone_100_west_coast.json')
 
 
 def load_east_coast_json():
-    return load_json('../../Data/east_coast.json')
+    return load_json('../../Data/rolling_stone_100_east_coast.json')
 
 
 def save_json(save_name, dictionary):
@@ -59,15 +60,53 @@ def cleanup(text):
     # Remove text within square brackets and parentheses
     text = re.sub(r"\[.*?\]", "", text)  # Removes [bracketed text]
     text = re.sub(r"\(.*?\)", "", text)  # Removes (parenthesized text)
+    text = re.sub(r"[“”]", '"', text)
+    text = re.sub(r"[‘’]", "'", text)
+
+    # Replace multiple instances of punctuation with a single instance
+    text = re.sub(r'([.!?,:;])\1+', r'\1', text)
+
+    # Ensure a single space follows punctuation
+    text = re.sub(r'([.!?,:;])([^\s])', r'\1 \2', text)
+
+    # Remove excessive whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+
+    # Replace curly quotes with straight quotes
+    text = text.replace('“', '"').replace('”', '"')
+
+    # Remove or replace nested quotes (depending on preference)
+    # This pattern looks for a quote inside a quoted string and removes it
+    text = re.sub(r'\"(.*?)\"(.*?)\"(.*?)\"', r'"\1\2\3"', text)
+
+    # Replace multiple spaces with a single space
+    text = re.sub(r'\s+', ' ', text)
 
     # Convert text to lowercase
     text = text.lower()
+
+    # Remove leading and trailing quotes
+    text = text.strip('"')
 
     # Replace specified characters with the desired character or an empty string
     text = text.replace('.', '').replace('-', ' ').replace("’", '')
     text = text.replace("?", '').replace("!", '').replace("*", 'i')
     text = text.replace('&#8217;', '').replace(',', '').replace('&amp;', '&')
-    text = text.replace('\n', ' ')
+    text = text.replace('\n', '')
+
+    # Here address the word related issues.
+    text = text.replace('niggas', 'nigga').replace('niggaz', 'nigga')
+    text = (text.replace('yo', 'yeah')
+            .replace('yah ', 'yeah')
+            .replace('ya', 'yeah')
+            .replace('yea', 'yeah')
+            .replace('yep', 'yeah')
+            .replace('yeahhu', 'yeah')
+            .replace('yeahhur', 'yeah')
+            .replace('yeahh', 'yeah')
+            .replace('yeahhr', 'yeah')
+            .replace('yeahhh', 'yeah')
+            .replace('yeahr', 'yeah'))
 
     return text
 
@@ -117,10 +156,46 @@ def load_txt_into_dataframe(path):
                     if match:
                         extracted_year = match.group()
                 # Append the file path, file name, and content to the data list
-                data.append({"Artist": file_path.split('/')[-3], "Album": file_path.split('/')[-2],
+                data.append({"Coast": file_path.split('/')[-4], "Artist": file_path.split('/')[-3], "Album": file_path.split('/')[-2],
                              "Album Release Year": int(extracted_year[1:-1]),
                              "Song": file.replace('.txt', ''), "Lyrics": content})
 
+    return pd.DataFrame(data)
+
+def load_audio_into_dataframe(path):
+    """
+    Input: path - string
+    Function to recursively go through the folder structure
+    and load metadata from all the audio files into a DataFrame.
+    Used to load audio file metadata.
+    """
+
+    base_directory = path
+    data = []
+
+    # Loop through each root, directory, and file in the base directory
+    for root, dirs, files in os.walk(base_directory):
+        for file in files:
+            # Check if the file is an audio file (e.g., .wav, .mp3)
+            if file.lower().endswith((".wav", ".mp3")):
+                # Construct the full file path
+                file_path = os.path.join(root, file)
+                # Load the audio file with librosa
+                y, sr = librosa.load(file_path, sr=None)  # sr=None to preserve the native sampling rate
+
+                # Get duration in seconds
+                duration = librosa.get_duration(y=y, sr=sr)
+
+                # Append the file path, file name, duration, and sample rate to the data list
+                data.append({
+                    "FilePath": file_path,
+                    "FileName": file,
+                    "Duration (s)": duration,
+                    "Sample Rate (Hz)": sr,
+                    # You can add more features here
+                })
+
+    # Convert the list of dictionaries into a pandas DataFrame
     return pd.DataFrame(data)
 
 
@@ -137,12 +212,20 @@ def calculate_concreteness_score(word_scores):
 def calculate_correctness_score_of_tokens(dataframe, concreteness_ratings):
     for index, row in dataframe.iterrows():
         # Calculate new value for the current row
-        frequency_distribution = {word: row['Lyrics'].count(word) for word in set(row['Lyrics'])}
+        frequency_distribution = {word: row['Tokens'].count(word) for word in set(row['Tokens'])}
         word_scores = {word: (concreteness_ratings.get(word, 0), freq) for word, freq in frequency_distribution.items()}
         correctness_score = calculate_concreteness_score(word_scores)
         # Assign the new value to a new column for that row
         dataframe.at[index, 'Correctness'] = correctness_score
     return dataframe
+
+
+def word_count_of_text(text):
+    return len(text.split(' '))
+
+
+def unique_word_count_of_text(text):
+    return len(list(set(text.split(' '))))
 
 
 def filter_dataframe_by_artist(df, artist):
@@ -151,3 +234,143 @@ def filter_dataframe_by_artist(df, artist):
 
 def filter_dataframe_by_album(df, year):
     return df[df['Album Release Year'] == year]
+
+# --------------------------------DATAFRAME RELATED FUNCTIONS----------------------------------------
+
+# --------------------------------LOADER FUNCTIONS----------------------------------------
+def get_all_artists(json_path):
+    with open(json_path) as json_file:
+        data = json.load(json_file)
+    return data
+
+def get_all_lyrics_of_an_artist(artist_name, json_path):
+    artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
+    artist_data = artists_data[artist_name]
+
+    lyrics_paths = [item['lyrics_path'] for item in artist_data if 'lyrics_path' in item]
+
+    # Collect all DataFrames in a list first
+    dfs = [load_txt_into_dataframe(path) for path in lyrics_paths]
+
+    # Concatenate all DataFrames at once
+    all_lyrics_df = pd.concat(dfs, ignore_index=True)
+
+    return all_lyrics_df
+
+def get_all_lyrics_of_an_artist_between_years(artist_name, json_path, start_year, end_year):
+    artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
+    artist_data = artists_data[artist_name]
+
+    lyrics_paths = []
+
+    for item in artist_data:
+        if 'lyrics_path' in item:
+            release_year = int(item['release_date'])
+            if start_year <= release_year <= end_year:
+                lyrics_paths.append(item['lyrics_path'])
+
+    # Collect all DataFrames in a list first
+    dfs = [load_txt_into_dataframe(path) for path in lyrics_paths]
+
+    # Concatenate all DataFrames at once
+    all_lyrics_df = pd.concat(dfs, ignore_index=True)
+
+    return all_lyrics_df
+
+def get_all_audio_of_an_artist(artist_name, json_path):
+    artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
+    artist_data = artists_data[artist_name]
+
+    audio_paths = [item['audio_path'] for item in artist_data if 'audio_path' in item]
+
+    # Collect all DataFrames in a list first
+    dfs = [load_audio_into_dataframe(path) for path in audio_paths]
+
+    # Concatenate all DataFrames at once
+    all_audio_df = pd.concat(dfs, ignore_index=True)
+
+    return all_audio_df
+
+def get_all_audio_of_an_artist_between_years(artist_name, json_path, start_year, end_year):
+    artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
+    artist_data = artists_data[artist_name]
+
+    audio_paths = []
+
+    for item in artist_data:
+        if 'audio_path' in item:
+            release_year = int(item['release_date'])
+            if start_year <= release_year <= end_year:
+                audio_paths.append(item['audio_path'])
+
+    # Collect all DataFrames in a list first
+    dfs = [load_audio_into_dataframe(path) for path in audio_paths]
+
+    # Concatenate all DataFrames at once
+    all_audio_df = pd.concat(dfs, ignore_index=True)
+
+    return all_audio_df
+
+def get_all_artist_lyrics_between_years(json_path, start_year, end_year):
+    artists_data = get_all_artists(json_path)
+
+    lyrics_paths = []
+
+    for item in artists_data:
+        if 'lyrics_path' in item:
+            release_year = int(item['release_date'])
+            if start_year <= release_year <= end_year:
+                lyrics_paths.append(item['lyrics_path'])
+
+    dfs = [load_txt_into_dataframe(path) for path in lyrics_paths]
+    all_lyrics_df = pd.concat(dfs, ignore_index=True)
+
+    return all_lyrics_df
+
+def get_all_artist_lyrics(json_path):
+    artists_data = get_all_artists(json_path)
+
+    lyrics_paths = []
+
+    for item in artists_data.values():
+        for i in item:
+            if 'lyrics_path' in i:
+                lyrics_paths.append(i['lyrics_path'])
+
+    dfs = [load_txt_into_dataframe(path) for path in lyrics_paths]
+    all_lyrics_df = pd.concat(dfs, ignore_index=True)
+
+    return all_lyrics_df
+
+def get_all_artist_audio_between_years(json_path, start_year, end_year):
+    artists_data = get_all_artists(json_path)
+
+    audio_paths = []
+
+    for item in artists_data:
+        if 'audio_path' in item:
+            release_year = int(item['release_date'])
+            if start_year <= release_year <= end_year:
+                audio_paths.append(item['audio_paths'])
+
+    dfs = [load_audio_into_dataframe(path) for path in audio_paths]
+    all_audio_df = pd.concat(dfs, ignore_index=True)
+
+    return all_audio_df
+
+def get_all_artist_audio(json_path):
+    artists_data = get_all_artists(json_path)
+
+    audio_paths = []
+
+    for item in artists_data.values():
+        for i in item:
+            if 'audio_path' in i:
+                audio_paths.append(i['audio_path'])
+
+    dfs = [load_audio_into_dataframe(path) for path in audio_paths]
+    all_audio_df = pd.concat(dfs, ignore_index=True)
+
+    return all_audio_df
+# --------------------------------LOADER FUNCTIONS----------------------------------------
+#%%
