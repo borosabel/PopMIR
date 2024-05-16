@@ -5,6 +5,8 @@ import re
 import pandas as pd
 import os
 import librosa
+import spacy
+nlp = spacy.load('en_core_web_sm')
 
 
 def get_set_of_artists(data):
@@ -49,54 +51,61 @@ def load_json(file_name):
     return loaded_data
 
 
-def cleanup(text):
-    """
-    Input: string
-    Function to clean up the text.
-    Removes text within square brackets and parentheses, converts to lowercase,
-    and removes specified characters.
-    Returns a cleaned string.
-    """
-    # Remove text within square brackets and parentheses
-    text = re.sub(r"\[.*?\]", "", text)  # Removes [bracketed text]
-    text = re.sub(r"\(.*?\)", "", text)  # Removes (parenthesized text)
-    text = re.sub(r"[“”]", '"', text)
-    text = re.sub(r"[‘’]", "'", text)
+def lemmatize(text):
+    doc = nlp(text)
+    return " ".join([token.lemma_ for token in doc])
 
-    # Replace multiple instances of punctuation with a single instance
+
+def cleanup_entity_rec(text):
+    # Remove annotations in brackets and parentheses
+    text = re.sub(r"\[.*?\]", "", text)
+    text = re.sub(r"\(.*?\)", "", text)
+
+    # Normalize different quote marks to standard forms
+    text = re.sub(r'[“”]', '"', text)
+    text = re.sub(r'[‘’]', "'", text)
+
+    # Clean up excessive use of punctuation marks
     text = re.sub(r'([.!?,:;])\1+', r'\1', text)
-
-    # Ensure a single space follows punctuation
     text = re.sub(r'([.!?,:;])([^\s])', r'\1 \2', text)
 
-    # Remove excessive whitespace
+    # Remove HTML entities and unnecessary special characters, standardize ampersands
+    text = text.replace('&#8217;', '').replace('&amp;', '&')
+
+    # Remove hashtags, unnecessary double quotes, and extra spaces
+    text = re.sub(r'#\w+', '', text)
+    text = re.sub(r'\"(.*?)\"(.*?)\"(.*?)\"', r'"\1\2\3"', text)
     text = re.sub(r'\s+', ' ', text).strip()
 
-    # Replace curly quotes with straight quotes
+    text = re.sub(r'\bCali\b', 'California', text)
+    text = re.sub(r'\bNew York City\b', 'New York', text)
+    text = re.sub(r'\bLA\b', 'Los Angeles', text)
+
+    return text
+
+def cleanup(text):
+    # Original cleanup steps
+    text = re.sub(r"\[.*?\]", "", text)
+    text = re.sub(r"\(.*?\)", "", text)
+    text = re.sub(r'#\w+', '', text)
+    text = re.sub(r'[“”]', '"', text)
+    text = re.sub(r'[‘’]', "'", text)
+    text = re.sub(r'([.!?,:;])\1+', r'\1', text)
+    text = re.sub(r'([.!?,:;])([^\s])', r'\1 \2', text)
+    text = re.sub(r'\s+', ' ', text).strip()
     text = text.replace('“', '"').replace('”', '"')
-
-    # Remove or replace nested quotes (depending on preference)
-    # This pattern looks for a quote inside a quoted string and removes it
     text = re.sub(r'\"(.*?)\"(.*?)\"(.*?)\"', r'"\1\2\3"', text)
-
-    # Replace multiple spaces with a single space
     text = re.sub(r'\s+', ' ', text)
-
-    # Convert text to lowercase
     text = text.lower()
-
-    # Remove leading and trailing quotes
     text = text.strip('"')
-
-    # Replace specified characters with the desired character or an empty string
     text = text.replace('.', '').replace('-', ' ').replace("’", '')
     text = text.replace("?", '').replace("!", '').replace("*", 'i')
     text = text.replace('&#8217;', '').replace(',', '').replace('&amp;', '&')
     text = text.replace('\n', '')
 
-    # Here address the word related issues.
-    text = text.replace('niggas', 'nigga').replace('niggaz', 'nigga')
-    text = (text.replace('yo', 'yeah')
+    # Address synonyms and slangs
+    text = (text.replace('niggas', 'nigga').replace('niggaz', 'nigga')
+            .replace('yo', 'yeah')
             .replace('yah ', 'yeah')
             .replace('ya', 'yeah')
             .replace('yea', 'yeah')
@@ -107,6 +116,9 @@ def cleanup(text):
             .replace('yeahhr', 'yeah')
             .replace('yeahhh', 'yeah')
             .replace('yeahr', 'yeah'))
+
+    # Optionally add lemmatization for other NLP tasks
+    text = lemmatize(text)
 
     return text
 

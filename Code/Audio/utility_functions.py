@@ -5,7 +5,12 @@ import re
 import pandas as pd
 import os
 import librosa
+import numpy as np
+from scipy.stats import gmean, kurtosis
+import madmom
 
+FRAME_LENGTH = 2048
+HOP_LENGTH = 512
 
 def get_set_of_artists(data):
     artists = []
@@ -161,6 +166,7 @@ def load_txt_into_dataframe(path):
 
     return pd.DataFrame(data)
 
+
 def load_audio_into_dataframe(path):
     """
     Input: path - string
@@ -187,8 +193,11 @@ def load_audio_into_dataframe(path):
 
                 # Append the file path, file name, duration, and sample rate to the data list
                 data.append({
+                    "Artist": file_path.split('/')[-3],
+                    "Album": file_path.split('/')[-2],
+                    "Coast": file_path.split('/')[-4].lower(),
                     "Path": file_path,
-                    "Name": file,
+                    "Song": file,
                     "Duration (s)": duration,
                     "Sample Rate (Hz)": sr
                 })
@@ -233,6 +242,7 @@ def filter_dataframe_by_artist(df, artist):
 def filter_dataframe_by_album(df, year):
     return df[df['Album Release Year'] == year]
 
+
 # --------------------------------DATAFRAME RELATED FUNCTIONS----------------------------------------
 
 # --------------------------------LOADER FUNCTIONS----------------------------------------
@@ -240,6 +250,7 @@ def get_all_artists(json_path):
     with open(json_path) as json_file:
         data = json.load(json_file)
     return data
+
 
 def get_all_lyrics_of_an_artist(artist_name, json_path):
     artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
@@ -254,6 +265,7 @@ def get_all_lyrics_of_an_artist(artist_name, json_path):
     all_lyrics_df = pd.concat(dfs, ignore_index=True)
 
     return all_lyrics_df
+
 
 def get_all_lyrics_of_an_artist_between_years(artist_name, json_path, start_year, end_year):
     artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
@@ -275,6 +287,7 @@ def get_all_lyrics_of_an_artist_between_years(artist_name, json_path, start_year
 
     return all_lyrics_df
 
+
 def get_all_audio_of_an_artist(artist_name, json_path):
     artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
     artist_data = artists_data[artist_name]
@@ -288,6 +301,7 @@ def get_all_audio_of_an_artist(artist_name, json_path):
     all_audio_df = pd.concat(dfs, ignore_index=True)
 
     return all_audio_df
+
 
 def get_all_audio_of_an_artist_between_years(artist_name, json_path, start_year, end_year):
     artists_data = get_all_artists(json_path)  # Assuming this function returns a dict-like object
@@ -309,6 +323,7 @@ def get_all_audio_of_an_artist_between_years(artist_name, json_path, start_year,
 
     return all_audio_df
 
+
 def get_all_artist_lyrics_between_years(json_path, start_year, end_year):
     artists_data = get_all_artists(json_path)
 
@@ -325,6 +340,7 @@ def get_all_artist_lyrics_between_years(json_path, start_year, end_year):
 
     return all_lyrics_df
 
+
 def get_all_artist_lyrics(json_path):
     artists_data = get_all_artists(json_path)
 
@@ -339,6 +355,7 @@ def get_all_artist_lyrics(json_path):
     all_lyrics_df = pd.concat(dfs, ignore_index=True)
 
     return all_lyrics_df
+
 
 def get_all_artist_audio_between_years(json_path, start_year, end_year):
     artists_data = get_all_artists(json_path)
@@ -356,13 +373,13 @@ def get_all_artist_audio_between_years(json_path, start_year, end_year):
 
     return all_audio_df
 
+
 def get_all_artist_audio(json_path):
     artists_data = get_all_artists(json_path)
 
     audio_paths = []
     release_years_expanded = []
     dfs = []
-    print("Asd")
     for item in artists_data.values():
         for i in item:
             if 'audio_path' in i:
@@ -376,5 +393,212 @@ def get_all_artist_audio(json_path):
     all_audio_df['Release Year'] = release_years_expanded
 
     return all_audio_df
-# --------------------------------LOADER FUNCTIONS----------------------------------------
-#%%
+
+
+# --------------------------------LOADER FUNCTIONS---------------------------------------
+
+# --------------------------------FEATURES FROM ISABELLA'S PAPER---------------------------------------
+
+# Calculate spectral centroid to approximate brightness
+def calculate_brightness(y, sr):
+    S = np.abs(librosa.stft(y))
+    power_spectrum = np.abs(S) ** 2
+    frequencies = librosa.fft_frequencies(sr=sr)
+    high_freq_mask = frequencies > 1500
+    total_energy = np.sum(power_spectrum)
+    high_freq_energy = np.sum(power_spectrum[high_freq_mask, :], axis=0)
+    avg_high_freq_energy = np.mean(high_freq_energy)
+    brightness_percentage = (avg_high_freq_energy / total_energy) * 100 if total_energy > 0 else 0
+
+    return brightness_percentage
+
+
+# Calculate energy in a specific frequency band (2000-4000 Hz)
+def band_energy(y, sr):
+    S, phase = librosa.magphase(librosa.stft(y))
+    frequencies = librosa.fft_frequencies(sr=sr)
+    band_mask = (frequencies >= 2000) & (frequencies <= 4000)
+    band_energy = np.sqrt(np.mean(np.square(S[band_mask])))
+    return band_energy
+
+
+# Calculate envelope flatness
+def envelope_flatness(y):
+    envelope = librosa.feature.rms(y=y)[0]
+    return gmean(envelope) / np.mean(envelope)
+
+
+def envelope_kurtosis(y):
+    # Compute the temporal envelope using the onset strength
+    envelope = librosa.feature.rms(y=y)[0]
+    env_kurtosis = kurtosis(envelope, fisher=True)
+    return env_kurtosis
+
+
+def calculate_envelope_quantile_range(y):
+    envelope = librosa.feature.rms(y=y)[0]
+    q_0_9 = np.quantile(envelope, 0.9)
+    q_0_2 = np.quantile(envelope, 0.2)
+    quantile_range = q_0_9 - q_0_2
+
+    return quantile_range
+
+def calculate_first_attack_time(y, sr=44100):
+    # Get onset times in samples
+    onset_frames = librosa.onset.onset_detect(y=y, sr=sr, units='frames')
+    onset_times = librosa.frames_to_time(onset_frames, sr=sr)
+    if len(onset_times) == 0:
+        return 0  # No onsets were detected
+    # Assuming the first onset is the start of the first attack
+    first_onset = onset_times[0]
+    # Get the amplitude envelope
+    envelope = librosa.feature.rms(y=y)
+    # Find the peak after the first onset (end of attack phase)
+    first_onset_sample = librosa.time_to_samples([first_onset], sr=sr)[0]
+    peak_index = np.argmax(envelope[0][first_onset_sample:]) + first_onset_sample
+    peak_time = librosa.samples_to_time([peak_index], sr=sr)[0]
+    # Calculate the duration of the first attack phase
+    first_attack_duration = peak_time - first_onset
+    return first_attack_duration
+
+def calculate_harmonic_energy(y):
+    # Separate the harmonic part from the noise
+    y_harmonic = librosa.effects.harmonic(y)
+    # Calculate the RMS energy of the harmonic component
+    rms_energy = np.sqrt(np.mean(y_harmonic**2))
+    return rms_energy
+
+
+def calculate_harmonic_percussive_ratio(y):
+    # Separate the harmonic and percussive components
+    y_harmonic, y_percussive = librosa.effects.hpss(y)
+
+    # Calculate the RMS energy of the harmonic component
+    rms_harmonic = np.sqrt(np.mean(y_harmonic**2))
+
+    # Calculate the RMS energy of the percussive component
+    rms_percussive = np.sqrt(np.mean(y_percussive**2))
+
+    # Calculate the ratio of RMS energies
+    if rms_percussive != 0:
+        ratio = rms_harmonic / rms_percussive
+    else:
+        ratio = float('inf')  # Avoid division by zero
+
+    return ratio
+
+
+def calculate_high_frequency_ratio(y, sr):
+    # Perform the Short-Time Fourier Transform (STFT)
+    S = np.abs(librosa.stft(y))
+    frequencies = librosa.fft_frequencies(sr=sr)
+
+    high_freq_indices = np.where(frequencies > 1000)[0]
+    band_freq_indices = np.where((frequencies >= 250) & (frequencies <= 400))[0]
+
+    S_high = S[high_freq_indices, :]
+    S_band = S[band_freq_indices, :]
+
+    rms_high = np.sqrt(np.mean(np.square(S_high)))
+
+    rms_band = np.sqrt(np.mean(np.square(S_band)))
+
+    if rms_band != 0:
+        ratio = rms_high / rms_band
+    else:
+        ratio = float('inf')  # Avoid division by zero
+
+    return ratio
+
+
+import pyloudnorm as pyln
+import soundfile as sf
+def calculate_loudness_sone(file_path):
+    # Load audio file
+    data, rate = sf.read(file_path)
+
+    # Create a Meter instance with ITU-R BS.1770-4 algorithm
+    meter = pyln.Meter(rate)  # specify sample rate
+
+    # Measure loudness
+    loudness = meter.integrated_loudness(data)
+
+    # Convert from LUFS to sones approximately (very rough approximation)
+    sones = 2 ** ((loudness - 40) / 10)  # This is a simplified approximation
+
+    return sones
+
+
+def calculate_low_energy(y):
+    rms = librosa.feature.rms(y=y)[0]
+    avg_rms = np.mean(rms)
+    low_energy_frames = np.sum(rms < avg_rms)
+    low_energy_percentage = (low_energy_frames / len(rms)) * 100  # percentage
+    return low_energy_percentage
+
+
+def find_max_rms_position(y, sr):
+    rms_values = librosa.feature.rms(y=y)[0]
+    max_rms_index = np.argmax(rms_values)
+    max_rms_position = librosa.frames_to_time([max_rms_index], sr=sr, hop_length=512)[0]
+    return max_rms_position
+
+
+def find_max_rms_value(y):
+    rms_values = librosa.feature.rms(y=y)[0]
+    max_rms_value = np.max(rms_values)
+    return max_rms_value
+
+
+def count_segments_based_on_rms(y, threshold=0.01):
+    rms = librosa.feature.rms(y=y)[0]
+    rms_diff = np.abs(np.diff(rms))
+    change_points = np.where(rms_diff > threshold)[0]
+    num_segments = len(change_points) + 1
+
+    return num_segments
+
+
+def calculate_percussive_energy(y):
+    _, y_percussive = librosa.effects.hpss(y)
+    rms_energy = np.sqrt(np.mean(np.square(y_percussive)))
+    return rms_energy
+
+
+def calculate_rms_energy(y):
+    rms_energy = librosa.feature.rms(y=y)[0]
+    return rms_energy
+
+
+def calculate_average_rms_energy(y):
+    rms_energy = librosa.feature.rms(y=y)[0]
+    average_rms_energy = np.mean(rms_energy)
+    return average_rms_energy
+
+def calculate_average_spectral_centroid(y, sr):
+    centroids = librosa.feature.spectral_centroid(y=y, sr=sr)[0]
+    average_centroid = np.mean(centroids)
+    return average_centroid
+
+
+from scipy.stats import entropy
+def calculate_spectral_entropy(y):
+    S = np.abs(librosa.stft(y))
+    psd = np.mean(S**2, axis=1)
+    psd_norm = psd / np.sum(psd)
+    spectral_entropy = entropy(psd_norm)
+    return spectral_entropy
+
+def average_calculate_spectral_flatness(y):
+    flatness = librosa.feature.spectral_flatness(y=y)
+    return np.mean(flatness)
+
+def zero_crossing_rate(y):
+    zcrs = librosa.feature.zero_crossing_rate(y, frame_length=FRAME_LENGTH, hop_length=HOP_LENGTH)
+    zcr_mean = np.mean(zcrs)
+    zcr_std = np.std(zcrs)
+    return zcr_mean, zcr_std
+
+
+
+# --------------------------------FEATURES FROM ISABELLA'S PAPER---------------------------------------
