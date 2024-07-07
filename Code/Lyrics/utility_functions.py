@@ -79,7 +79,10 @@ def cleanup_entity_rec(text):
 
     text = re.sub(r'\bCali\b', 'California', text)
     text = re.sub(r'\bNew York City\b', 'New York', text)
+    text = re.sub(r'\bYork\b', 'New York', text)
+    text = re.sub(r'\bNew New York\b', 'New York', text)
     text = re.sub(r'\bLA\b', 'Los Angeles', text)
+    text = re.sub(r'\bVegas\b', 'Las Vegas', text)
 
     return text
 
