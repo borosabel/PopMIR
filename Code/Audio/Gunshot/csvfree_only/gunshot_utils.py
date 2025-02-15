@@ -17,7 +17,7 @@ WIN_SIZES = [0.023, 0.046, 0.093]
 N_MELS = 80
 F_MIN = 27.5
 F_MAX = 16000
-NUM_FRAMES = 15
+NUM_FRAMES = 86
 FRAME_LENGTH = HOP_LENGTH * (NUM_FRAMES - 1)
 
 def get_next_file_index(output_folder, prefix):

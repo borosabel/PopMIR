@@ -17,20 +17,21 @@ WIN_SIZES = [0.023, 0.046, 0.093]
 N_MELS = 80
 F_MIN = 27.5
 F_MAX = 16000
-NUM_FRAMES = 15
+NUM_FRAMES = 30
 FRAME_LENGTH = HOP_LENGTH * (NUM_FRAMES - 1)
 
 def get_next_file_index(output_folder, prefix):
-    existing_files = [f for f in os.listdir(output_folder) if f.startswith(prefix) and f.endswith('.mp3')]
+    existing_files = [f for f in os.listdir(output_folder) if f.startswith(prefix)]
     if not existing_files:
-        return 0
-    indices = [int(f[len(prefix):-4]) for f in existing_files]
+        return 1
+    indices = [int(f.split('_')[-1].split('.')[0]) for f in existing_files]
     return max(indices) + 1
 
 def generate_data_samples(music_df, gunshot_df, number_of_samples_w_gunshots, number_of_samples_wo_gunshots, gunshot_volume_increase_dB=5):
     records = []
-    output_folder = '/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Audio/Gunshots/Combined'
-    # output_folder = '/Users/borosabel/Documents/Uni/Thesis/PopMIR/Data/Audio/Gunshots/Combined_archive'
+    output_folder = './gunshot_dataset'
+
+    os.makedirs(output_folder, exist_ok=True)
 
     next_gunshot_index = get_next_file_index(output_folder, 'with_gunshot_')
     next_no_gunshot_index = get_next_file_index(output_folder, 'without_gunshot_')
@@ -46,11 +47,9 @@ def generate_data_samples(music_df, gunshot_df, number_of_samples_w_gunshots, nu
         music_audio = AudioSegment.from_file(selected_music_row['filename'])
         gunshot_audio = AudioSegment.from_file(selected_gunshot_row['filename'])
 
-        # print(selected_music_row['filename'], selected_gunshot_row['filename'])
-
         # Increase the volume of the gunshot audio
-        min_gunshot_volume_increase_dB = -15
-        max_gunshot_volume_increase_dB = 3
+        min_gunshot_volume_increase_dB = -5
+        max_gunshot_volume_increase_dB = 10
         random_volume_increase_dB = random.uniform(min_gunshot_volume_increase_dB, max_gunshot_volume_increase_dB)
         gunshot_audio = gunshot_audio + random_volume_increase_dB
 
@@ -59,7 +58,7 @@ def generate_data_samples(music_df, gunshot_df, number_of_samples_w_gunshots, nu
         gunshot_start_timestamps_ms = [t * 1000 for t in gunshot_start_timestamps_sec]  # Convert to milliseconds
 
         # Calculate gunshot duration and extra music duration
-        gunshot_audio = gunshot_audio[gunshot_start_timestamps_ms[0]:] # Cut the gunshot audio to start from the first occurrence
+        gunshot_audio = gunshot_audio[gunshot_start_timestamps_ms[0]:]  # Cut the gunshot audio to start from the first occurrence
         gunshot_duration_ms = len(gunshot_audio)
         extra_music_duration = 5000  # Additional 5 seconds of music
         music_segment_duration = gunshot_duration_ms + 2000 + extra_music_duration
@@ -82,17 +81,23 @@ def generate_data_samples(music_df, gunshot_df, number_of_samples_w_gunshots, nu
             if pos < music_segment_duration:
                 combined_audio = combined_audio.overlay(gunshot_audio, position=pos)
 
-        # Save the combined audio to a file
-        output_filename = f'{output_folder}/with_gunshot_{next_gunshot_index}.mp3'
+        # Create a descriptive output filename with song and gunshot base names
+        music_base = os.path.splitext(os.path.basename(selected_music_row['filename']))[0]
+        gunshot_base = os.path.splitext(os.path.basename(selected_gunshot_row['filename']))[0]
+        output_filename = f'{output_folder}/with_gunshot_{music_base}_{gunshot_base}_{next_gunshot_index}.mp3'
+
         combined_audio.export(output_filename, format='mp3')
         next_gunshot_index += 1
 
         # Save the information in the records list
         records.append({
             'filename': output_filename,
+            'source_song': selected_music_row['filename'],  # Add source song info
+            'source_gunshot': selected_gunshot_row['filename'],  # Add source gunshot info
             'gunshot_location_in_seconds': [2 + (ts - gunshot_start_timestamps_ms[0]) / 1000 for ts in gunshot_start_timestamps_ms],  # Convert to seconds
             'num_gunshots': len(gunshot_start_timestamps_ms),
-            'label': 1
+            'label': 1,
+            'type': 'with_gunshot'
         })
 
     # Generate samples without gunshots
@@ -115,17 +120,22 @@ def generate_data_samples(music_df, gunshot_df, number_of_samples_w_gunshots, nu
         # Cut out the segment from the original music
         music_segment = music_audio[start_time:start_time + segment_duration]
 
-        # Save the audio segment to a file
-        output_filename = f'{output_folder}/without_gunshot_{next_no_gunshot_index}.mp3'
+        # Create a descriptive output filename for the without gunshot case
+        music_base = os.path.splitext(os.path.basename(selected_music_row['filename']))[0]
+        output_filename = f'{output_folder}/without_gunshot_{music_base}_{next_no_gunshot_index}.mp3'
+
         music_segment.export(output_filename, format='mp3')
         next_no_gunshot_index += 1
 
         # Save the information in the records list
         records.append({
             'filename': output_filename,
-            'num_gunshots': 0,
+            'source_song': selected_music_row['filename'],  # Add source song info
+            'source_gunshot': None,  # No gunshot in this sample
             'gunshot_location_in_seconds': [],
-            'label': 0
+            'num_gunshots': 0,
+            'label': 0,
+            'type': 'without_gunshot'
         })
 
     # Create a DataFrame from the records
@@ -147,8 +157,6 @@ def preprocess_audio_train(df, max_non_gunshot_samples=1):
         file_path = row['filename']
         num_gunshots = row['num_gunshots']
         gunshot_times = row['gunshot_location_in_seconds']
-
-        # print(file_path, num_gunshots, gunshot_times)
 
         try:
             waveform, sample_rate = torchaudio.load(file_path)
@@ -173,6 +181,7 @@ def preprocess_audio_train(df, max_non_gunshot_samples=1):
 
     return spectrograms, sample_rates, labels
 
+
 def select_random_segment(waveform, sample_rate, frame_length):
     total_duration = waveform.size(1) / sample_rate
     segment_length = frame_length
@@ -186,11 +195,37 @@ def select_random_segment(waveform, sample_rate, frame_length):
 
     return waveform[:, start_sample:end_sample]
 
-def select_gunshot_segment(waveform, sample_rate, gunshot_time, frame_length):
-    start_time = max(0, gunshot_time - (frame_length / sample_rate) / 2)
+def select_gunshot_segment(waveform, sample_rate, gunshot_time, frame_length, max_shift_sec=0):
+    """
+    Selects a segment of audio around the gunshot, allowing for a random shift in the gunshot position.
+
+    Parameters:
+        waveform (Tensor): The audio waveform tensor.
+        sample_rate (int): The sample rate of the audio.
+        gunshot_time (float): The time of the gunshot in seconds.
+        frame_length (int): The desired length of the segment (in samples).
+        max_shift_sec (float): Maximum time in seconds by which to shift the gunshot position.
+
+    Returns:
+        Tensor: The selected segment of audio.
+    """
+    # Compute the amount of shift in time (in seconds) randomly within [-max_shift_sec, +max_shift_sec]
+    random_shift = random.uniform(-max_shift_sec, max_shift_sec)
+
+    # Adjust the gunshot start time with the random shift
+    shifted_gunshot_time = gunshot_time + random_shift
+
+    # Ensure the start time doesn't go out of bounds (start time should be >= 0)
+    start_time = max(0, shifted_gunshot_time - (frame_length / sample_rate) / 2)
+
+    # Ensure the end time doesn't exceed the waveform length
     start_sample = int(start_time * sample_rate)
-    # print("gunshot start times", start_time)
     end_sample = start_sample + int(frame_length)
+
+    # Ensure we don't exceed the total length of the waveform
+    end_sample = min(end_sample, waveform.size(1))
+    start_sample = max(0, end_sample - int(frame_length))  # Adjust start if needed
+
     return waveform[:, start_sample:end_sample]
 
 def calculate_melbands(waveform, sample_rate):
@@ -253,5 +288,3 @@ def make_frames(X, y):
     y_frames.append(y)
 
     return X_frames, y_frames
-
-#%%
